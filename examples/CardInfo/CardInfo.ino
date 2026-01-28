@@ -4,14 +4,6 @@
   This example shows how use the utility libraries on which the
   SD library is based in order to get info about your SD card.
   Very useful for testing a card when you're not sure whether its working or not.
-  Pin numbers reflect the default SPI pins for Uno and Nano models.
-  The circuit:
-    SD card attached to SPI bus as follows:
- ** SDO - pin 11 on Arduino Uno/Duemilanove/Diecimila
- ** SDI - pin 12 on Arduino Uno/Duemilanove/Diecimila
- ** CLK - pin 13 on Arduino Uno/Duemilanove/Diecimila
- ** CS - depends on your SD card shield or module.
- 		Pin 10 used here for consistency with other Arduino examples
 
   created  28 Mar 2011
   by Limor Fried
@@ -27,17 +19,9 @@ Sd2Card card;
 SdVolume volume;
 SdFile root;
 
-// change this to match your SD shield or module;
-// Default SPI on Uno and Nano: pin 10
-// Arduino Ethernet shield: pin 4
-// Adafruit SD shields and modules: pin 10
-// Sparkfun SD shield: pin 8
-// MKR Zero SD: SDCARD_SS_PIN
-const int chipSelect = 10;
-
 void setup() {
   // Open serial communications and wait for port to open:
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
@@ -47,11 +31,10 @@ void setup() {
 
   // we'll use the initialization code from the utility libraries
   // since we're just testing if the card is working!
-  if (!card.init(SPI_HALF_SPEED, chipSelect)) {
+  if (!card.init(SPI_HALF_SPEED)) {
     Serial.println("initialization failed. Things to check:");
     Serial.println("* is a card inserted?");
-    Serial.println("* is your wiring correct?");
-    Serial.println("* did you change the chipSelect pin to match your shield or module?");
+    Serial.println("* are your switches correct?");
     Serial.println("Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!");
     while (1);
   } else {
