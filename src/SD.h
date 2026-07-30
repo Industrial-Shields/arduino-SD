@@ -18,7 +18,7 @@
 #include <Arduino.h>
 
 #if !defined(IS_HAVE_SD)
-#error "This library is not compatible with the selected PLC."
+#error "This PLC is not compatible with SDs."
 #endif
 
 #include "utility/SdFat.h"
